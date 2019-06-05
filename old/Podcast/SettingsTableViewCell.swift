@@ -1,0 +1,61 @@
+//
+//  SettingsTableViewCell.swift
+//  Podcast
+//
+//  Created by Drew Dunne on 3/8/17.
+//  Copyright © 2017 Cornell App Development. All rights reserved.
+//
+
+import UIKit
+
+class SettingsTableViewCell: UITableViewCell {
+    
+    class var height: CGFloat {
+        get {
+            return 46
+        }
+    }
+    let height: CGFloat = SettingsTableViewCell.height
+    let labelSidePadding: CGFloat = 17
+    let labelTopPadding: CGFloat = 14.5
+    
+    var titleLabel: UILabel!
+        
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        titleLabel = UILabel(frame: CGRect.zero)
+        titleLabel.font = ._14RegularFont()
+        titleLabel.textColor = .offBlack
+        titleLabel.textAlignment = .left
+        addSubview(titleLabel)
+        
+        titleLabel.snp.makeConstraints({ make in
+            make.trailing.lessThanOrEqualToSuperview().inset(labelSidePadding)
+            make.leading.equalToSuperview().inset(labelSidePadding)
+            make.top.bottom.equalToSuperview().inset(labelTopPadding)
+        })
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setTitle(_ title: String) {
+        titleLabel.text = title
+        titleLabel.sizeToFit()
+        titleLabel.snp.remakeConstraints { make in
+            make.leading.equalToSuperview().inset(labelSidePadding)
+            make.top.bottom.equalToSuperview().inset(labelTopPadding)
+            make.width.equalTo(titleLabel.frame.width)
+        }
+    }
+    
+    func displayError(error: String) {
+        // Override for subclassed views
+    }
+    
+    func clearError() {
+        // Override for subclassed views
+    }
+
+}
